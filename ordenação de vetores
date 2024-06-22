@@ -1,0 +1,36 @@
+#include <stdlib.h>
+#include <stdio.h>
+#include <string.h>
+
+int ordenar(int *vet, int index){
+    int i;
+    int j;
+    int maior;
+    int ordenado[index];
+    int aux;
+    int *p = vet;
+    
+    for(i = 0; i < index; i++){
+        for(j = i; j < 10; j++){
+            if(vet[j] > vet[i]){
+                aux = vet[j];
+                vet[j] = vet[i];
+                vet[i] = aux;
+            }
+        }
+    }
+    for(i = 0; i < 10; i++){
+        *p = vet[i];
+        p++;
+    }
+}
+int main()
+{
+    int vet[10] = {8,6,7,3,2,4,10,1,5,9};
+    ordenar(vet,10);
+    int i;
+    for(i = 0; i < 10; i++){
+        printf("%d ", vet[i]);
+    }
+    return 0;
+}
