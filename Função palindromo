@@ -1,0 +1,35 @@
+#include <stdlib.h>
+#include <stdio.h>
+#include <string.h>
+
+int palindromo(char *palavra){
+    int i;
+    int j;
+    char palavra_inversa[50] = " ";
+    
+    for(i = 0,j = strlen(palavra)-1; palavra[i] != '\0'; i++,j--){
+        palavra_inversa[i] = palavra[j];
+    }
+    if(strcmp(palavra,palavra_inversa) == 0){
+        return 1;
+    }
+    else{
+        return 0;
+    }
+}
+int main()
+{
+    char palavra[50];
+    gets(palavra);
+    int res = palindromo(palavra);
+    
+    switch(res){
+        case 0:
+            printf("A palavra nao eh um palindromo");
+            break;
+        case 1:
+            printf("A palavra eh um palindromo");
+            break;
+    }
+    return 0;
+}
