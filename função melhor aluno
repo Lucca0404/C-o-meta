@@ -1,0 +1,46 @@
+#include <stdlib.h>
+#include <stdio.h>
+#include <math.h>
+
+typedef struct{
+    int matricula;
+    float notas[3];
+    char nome[50];
+} aluno;
+
+int melhor_aluno(aluno *a, int index){
+    int i;
+    int j;
+    int maior_media;
+    float media;
+    int melhor_indice;
+    for(i = 0; i < index; i++){
+        media = 0;
+        for(j = 0; j < 3; j++){
+            media += a[i].notas[j];
+        }
+        media /=3;
+        if(media > maior_media){
+            maior_media = media;
+            melhor_indice = i;
+        }
+    }
+    return melhor_indice+1;
+}
+int main()
+{
+    aluno a1[3];
+    int i;
+    int j;
+    
+    for(i = 0; i < 3; i++){
+        printf("Digite as notas do %d aluno", i+1);
+        for(j = 0; j < 3; j++){
+            scanf("%f", &a1[i].notas[j]);
+        }
+    }
+    int res = melhor_aluno(a1,3);
+    
+    printf("o melhor aluno foi o %d", res);
+    return 0;
+}
