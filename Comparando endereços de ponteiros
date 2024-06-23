@@ -1,0 +1,14 @@
+#include <stdlib.h>
+#include <stdio.h>
+
+int main()
+{   
+    int num = 1;
+    int num2 = 2;
+    
+    int *p1 = &num;
+    int *p2 = &num2;
+    
+    p1 > p2? printf("O primeiro endereco eh o maior") : printf("O segundo endereco eh o maior");
+    return 0;
+}
