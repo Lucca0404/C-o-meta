@@ -1,0 +1,19 @@
+#include <stdlib.h>
+#include <stdio.h>
+#include <string.h>
+
+int fill(char *palavra, char c){
+    int i;
+    char *p = palavra;
+    for(i = 0; i < strlen(palavra); i++){
+        *p = c;
+        p++;
+    }
+}
+int main()
+{   
+    char palavra[20] = "minha nossa senhora";
+    fill(palavra,'a');
+    puts(palavra);
+    return 0;
+}
