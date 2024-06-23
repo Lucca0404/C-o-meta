@@ -1,0 +1,20 @@
+#include <stdlib.h>
+#include <stdio.h>
+
+int main()
+{   
+    int nums[5];
+    int *p = nums;
+    int i;
+    
+    for(i = 0; i < 5; i++){
+        scanf("%d", &nums[i]);
+    }
+    for(i = 0; i < 5; i++){
+        if(*p % 2 == 0){
+            printf("%d ", p);
+        }
+        p++;
+    }
+    return 0;
+}
