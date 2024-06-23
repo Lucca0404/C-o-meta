@@ -1,0 +1,21 @@
+#include <stdlib.h>
+#include <stdio.h>
+
+int main()
+{
+    int x;
+    char y;
+    float z;
+    double a;
+    
+    printf("%ld ", sizeof (int));
+    printf("%ld ", sizeof (float));
+    printf("%ld ", sizeof (double));
+    printf("%ld ", sizeof (char));
+    printf("%ld ", sizeof x);
+    printf("%ld ", sizeof z);
+    printf("%ld ", sizeof a);
+    printf("%ld", sizeof y);
+    
+    return 0;
+}
