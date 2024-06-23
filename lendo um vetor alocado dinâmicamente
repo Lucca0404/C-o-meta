@@ -1,0 +1,24 @@
+#include <stdlib.h>
+#include <stdio.h>
+
+int main()
+{
+    int num;
+    do{
+        scanf("%d", &num);
+    }while(num < 0);
+    
+    int *v = (int*) calloc(num,sizeof(int));
+    int i;
+    for(i = 0; i < num; i++){
+        do{
+            scanf("%d", &v[i]);
+        }while(v[i] < 2);
+    }
+    
+    for(i = 0; i < num; i++){
+        printf("%d", v[i]);
+    }
+    
+    return 0;
+}
