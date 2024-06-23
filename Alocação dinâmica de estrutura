@@ -1,0 +1,41 @@
+#include <stdlib.h>
+#include <stdio.h>
+
+typedef struct{
+    int idade;
+    float endereco[50];
+    char nome[50];
+} cadastro;
+
+cadastro *ptr(int num){
+    int i;
+    cadastro *p = (cadastro*) malloc(num * sizeof (cadastro));
+    cadastro *p2 = p;
+    for(i = 0; i < num; i++){
+        gets(p->nome);
+        setbuf(stdin,NULL);
+        gets(p->endereco);
+        setbuf(stdin,NULL);
+        scanf("%d", &(p->idade));
+        setbuf(stdin,NULL);
+        p2++;
+    }
+    
+    return p;
+}
+int main()
+{
+    cadastro *p2 = ptr(2);
+    cadastro *p3 = p2;
+    int i;
+    for(i = 0; i < 1; i++){
+        puts(p2->nome);
+        puts(p2->endereco);
+        printf("%d", p2->idade);
+        p3++;
+    }
+    
+    free(p2);
+    
+    return 0;
+}
