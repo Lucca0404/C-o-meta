@@ -1,0 +1,40 @@
+#include <stdlib.h>
+#include <stdio.h>
+#include <string.h>
+
+int strin(char *str1, char *str2){
+    int i;
+    int j;
+    int cont = 0;
+    char *p1 = str1;
+    char *p2 = str2;
+    for(i = 0; i < strlen(str1); i++){
+        cont = 0;
+        for(j = 0, p1 = &str1[i], p2 = str2; j < strlen(str2); j++){
+            if(*p1 == *p2){
+                cont++;
+            }
+            p1++;
+            p2++;
+        }
+        if(cont == strlen(str2)){
+            return 1;
+        }
+    }
+    return 0;
+}
+int main()
+{   
+    char palavra1[30];
+    char palavra2[30];
+    
+    fgets(palavra1, sizeof(palavra1), stdin);
+    fgets(palavra2,sizeof(palavra2), stdin);
+    palavra1[strcspn(palavra1, "\n")] = '\0';
+    palavra2[strcspn(palavra2, "\n")] = '\0';
+
+    int num = strin(palavra1,palavra2);
+    
+    num? printf("A segunda palavra esta dentro da primeira") : printf("A segunda palavra nao esta dentro da primeira");
+    return 0;
+}
