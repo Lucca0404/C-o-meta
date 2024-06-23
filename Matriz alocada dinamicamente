@@ -1,0 +1,50 @@
+#include <stdlib.h>
+#include <stdio.h>
+
+int achar(int *mat, int linhas, int colunas, int num){
+    int i;
+    int j;
+    for(i = 0; i < linhas; i++){
+        for(j = 0; j < colunas; j++){
+            if(mat[i * linhas + j] == num){
+                return 1;
+            }
+        }
+    }
+    return 0;
+}
+int main()
+{
+    int linhas;
+    int colunas;
+    int i;
+    int j;
+    
+    scanf("%d %d", &linhas, &colunas);
+    
+    int *p = (int*) calloc(linhas * colunas, sizeof(int));
+    
+    for(i = 0; i < linhas; i++){
+        for(j = 0; j < colunas; j++){
+            scanf("%d", &p[i * linhas + j]);
+        }
+    }
+    
+    int num;
+    
+    scanf("%d", &num);
+    
+    int res = achar(p,linhas,colunas,num);
+    
+    switch(res){
+        case 1:
+            printf("o numero esta na matriz");
+            break;
+        case 0:
+            printf("o numero nao esta na matriz");
+            break;
+    }
+    free(p);
+    
+    return 0;
+}
