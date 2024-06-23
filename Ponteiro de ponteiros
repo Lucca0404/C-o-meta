@@ -1,0 +1,16 @@
+#include <stdlib.h>
+#include <stdio.h>
+
+int main()
+{   
+    int a = 3;
+    int *b = &a;
+    int **c = &b;
+    int ***d = &c;
+    
+    printf("%d ", a);
+    printf("%d ", (*b)*2);
+    printf("%d ", (**c)*3);
+    printf("%d",(***d)*4);
+    return 0;
+}
