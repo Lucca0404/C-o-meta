@@ -1,0 +1,25 @@
+#include <stdlib.h>
+#include <stdio.h>
+
+int *fill(int num){
+    int *p1 = (int*) calloc(num,sizeof(int));
+    int i;
+    for(i = 0; i < num; i++){
+        p1[i] = rand()%num;
+    }
+    
+    return p1;
+}
+int main()
+{
+    int num;
+    int i;
+    scanf("%d", &num);
+    
+    int *p = fill(num);
+    
+    for(i = 0; i < num;i++){
+        printf("%d", p[i]);
+    }
+    return 0;
+}
