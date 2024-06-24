@@ -1,0 +1,37 @@
+#include <stdlib.h>
+#include <stdio.h>
+
+int *fill(int *ptr, int *ptr2,int tamanho){
+    int *p1 = (int*) calloc(tamanho, sizeof(int));
+    int i;
+    
+    for(i = 0; i < tamanho; i++){
+        p1[i] = ptr[i] + ptr2[i];
+    }
+    
+    return p1;
+}
+int main()
+{
+    int num = 5;
+    int i;
+    int *p1 = (int*) calloc(num,sizeof(int));
+    int *p2 = (int*) calloc(num,sizeof(int));
+    
+    for(i = 0; i < num; i++){
+        p1[i] = i;
+        p2[i] = i;
+    }
+    
+    int *p3 = fill(p1,p2,num);
+    
+    for(i = 0; i < num; i++){
+        printf("%d", p3[i]);
+    }
+    
+    free(p1);
+    free(p2);
+    free(p3);
+    
+    return 0;
+}
