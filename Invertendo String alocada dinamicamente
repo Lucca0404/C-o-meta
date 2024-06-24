@@ -1,0 +1,22 @@
+#include <stdlib.h>
+#include <stdio.h>
+#include <string.h>
+
+char *inverter(char *palavra){
+    char *p1 = (char*) malloc(strlen(palavra) * sizeof(char));
+    int i;
+    int j;
+    for(i = 0, j = strlen(palavra) - 1; i < strlen(palavra); i++,j--){
+        p1[i] = palavra[j];
+    }
+    return p1;
+}
+int main()
+{
+    char palavra[] = "Sabe muito";
+    char *p = inverter(palavra);
+    
+    puts(p);
+    
+    return 0;
+}
