@@ -1,0 +1,50 @@
+#include <stdlib.h>
+#include <stdio.h>
+
+int *multmat(int *ptr, int *ptr2,int tamanho){
+    int *p1 = (int*) calloc(tamanho*tamanho, sizeof(int));
+    int i;
+    int j;
+    int k;
+    
+    for(i = 0; i < tamanho; i++){
+        for(j = 0; j < tamanho; j++){
+            for(k = 0; k < tamanho; k++){
+                p1[i * tamanho + j] += ptr[i * tamanho + k] * ptr2[k * tamanho + j];
+            }
+        }
+    }
+    
+    return p1;
+}
+int main()
+{
+    int num = 2;
+    int i;
+    int j;
+    int *p1 = (int*) calloc(num*num,sizeof(int));
+    int *p2 = (int*) calloc(num*num,sizeof(int));
+    
+    for(i = 0; i < num; i++){
+        for(j = 0; j < num; j++){
+            p1[i * num + j] = i*num+j;
+            p2[i * num + j] = i*num+j;
+        }
+        
+    }
+    
+    int *p3 = multmat(p1,p2,num);
+    
+    for(i = 0; i < num; i++){
+        for(j = 0; j < num; j++){
+            printf("%d", p3[i * num + j]);
+        }
+        printf("\n");
+    }
+    
+    free(p1);
+    free(p2);
+    free(p3);
+    
+    return 0;
+}
