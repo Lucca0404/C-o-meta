@@ -1,0 +1,38 @@
+#include <stdlib.h>
+#include <stdio.h>
+
+int *mat(int tamanho){
+    int *p1 = (int*) calloc(tamanho*tamanho, sizeof(int));
+    int i;
+    int j;
+    for(i = 0; i < tamanho; i++){
+        for(j = 0; j < tamanho; j++){
+            if(j == i){
+                p1[i * tamanho + j] = 1;
+            }
+            else{
+                p1[i * tamanho + j] = 0;
+            }
+        }
+        
+    }
+    return p1;
+}
+int main()
+{
+    int tamanho;
+    int i;
+    int j;
+    
+    scanf("%d", &tamanho);
+    int *p = mat(tamanho);
+    
+    for(i = 0;i < tamanho; i++){
+        for(j = 0; j < tamanho; j++){
+            printf("%d", p[i * tamanho + j]);
+        }
+        printf("\n");
+    }
+    
+    return 0;
+}
