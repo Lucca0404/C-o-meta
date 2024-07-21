@@ -1,0 +1,24 @@
+#include <stdlib.h>
+#include <stdio.h>
+
+void insertion_sort(int *v, int n){
+    int i, j, aux;
+    for(i = 1; i < n; i++){
+        aux = v[i];
+        for(j = i; j > 0 && (aux < v[j-1]); j--){
+            v[j] = v[j-1];
+        }
+        v[j] = aux;
+    }
+}
+int main()
+{
+    int a[5] = {5,4,3,2,1};
+    insertion_sort(a,5);
+    int i;
+    for(i = 0; i < 5; i++){
+        printf("%d ", a[i]);
+    }
+
+    return 0;
+}
