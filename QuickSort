@@ -1,0 +1,45 @@
+#include <stdlib.h>
+#include <stdio.h>
+
+int particiona(int *v, int inicio, int final){
+    int pivo, esquerda, direita, aux;
+    esquerda = inicio;
+    direita = final;
+    pivo = v[inicio];
+    while(esquerda < direita){
+        while(esquerda <= final && v[esquerda] <= pivo){
+            esquerda++;
+        }
+        while(direita >= 0 && v[direita] > pivo){
+            direita--;
+        }
+        if(esquerda < direita){
+            aux = v[direita];
+            v[direita] = v[esquerda];
+            v[esquerda] = aux;
+         }
+    }
+    v[inicio] = v[direita];
+    v[direita] = pivo;
+    return direita;
+}
+
+void quicksort(int *v, int inicio, int final){
+    int pivo;
+    if(inicio < final){
+        pivo = particiona(v,inicio,final);
+        quicksort(v,inicio,pivo-1);
+        quicksort(v,pivo+1,final);
+    }
+}
+int main()
+{
+    int a[5] = {5,4,3,2,1};
+    quicksort(a,0,4);
+    int i;
+    for(i = 0; i < 5; i++){
+        printf("%d ", a[i]);
+    }
+
+    return 0;
+}
