@@ -1,48 +1,51 @@
 #include <stdlib.h>
 #include <math.h>
-#include "Ponto.h"
+#include "Cubo.h"
 
-struct ponto{
-    float x;
-    float y;
+struct cubo{
+    float lado;
 };
 
-Ponto* Ponto_cria(float x, float y){
-    Ponto* p = (Ponto*) malloc(sizeof(Ponto));
-    if(p != NULL){
-        p->x = x;
-        p->y = y;
-    }
-    return p;
+Cubo* Cubo_cria(float lado){
+    Cubo *c = (Cubo*) malloc(sizeof(Cubo));
+    
+    c->lado = lado;
+    return c;
 }
 
-void Ponto_libera(Ponto* p){
-    free(p);
+void Cubo_libera(Cubo* c){
+    free(c);
 }
 
-int Ponto_acessa(Ponto* p, float* x, float* y){
-    if(p == NULL){
+int Cubo_acessa(Cubo* c, float* lado){
+    if(c == NULL){
         return 0;
     }
-    *x = p->x;
-    *y = p->y;
+    *lado = c->lado;
     return 1;
 }
 
-int Ponto_atribui(Ponto* p, float x, float y){
-    if(p == NULL){
+int Cubo_atribui(Cubo* c, float lado){
+    if(c == NULL){
         return 0;
     }
-    p->x = x;
-    p->y = y;
+    c->lado = lado;
     return 1;
 }
 
-float Ponto_distancia(Ponto* p1, Ponto* p2){
-    if(p1 == NULL || p2 == NULL){
+float Cubo_area(Cubo* c){
+    if(c == NULL){
         return -1;
     }
-    float dx = p1->x - p2->x;
-    float dy = p1->y - p2->y;
-    return sqrt(pow(dx,2) + pow(dy,2));
+    int num_de_lados = 6;
+    float area = pow(c->lado,2) * num_de_lados;
+    return area;
+}
+
+float Cubo_volume(Cubo* c){
+    if(c == NULL){
+        return -1;
+    }
+    float volume = pow(c->lado,3);
+    return volume;
 }
