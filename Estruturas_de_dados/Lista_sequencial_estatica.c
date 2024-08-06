@@ -5,7 +5,7 @@
 struct lista{
     int qtd;
     struct aluno dados[MAX];
-}
+};
 
 Lista* Lista_criar(){
     
