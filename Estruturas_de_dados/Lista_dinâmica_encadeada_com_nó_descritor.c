@@ -30,7 +30,7 @@ void Lista_apagar(Lista* li){
         Elem *no = li->inicio;
         while(li->inicio != NULL){
             no = li->inicio;
-            li->inicio = li->inicio>prox;
+            li->inicio = li->inicio->prox;
             free(no);
         }
         free(li);
