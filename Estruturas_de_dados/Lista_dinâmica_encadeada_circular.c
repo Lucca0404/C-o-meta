@@ -155,16 +155,15 @@ int Lista_remove(Lista* li, int mat){
             *li = NULL;
             return 1;
         }
-    }
-    else{
-        Elem *ult = *li;
-        while(ult->prox != (*li)){
-            ult = ult->prox;
-        }
-        ult->prox = (*li)->prox;
-        *li = (*li)->prox;
-        free(no);
-        return 1;
+        else{
+            Elem *ult = *li;
+            while(ult->prox != (*li)){
+                ult = ult->prox;
+            }
+            ult->prox = (*li)->prox;
+            *li = (*li)->prox;
+            free(no);
+            return 1;
     }
     Elem *ant = no;
     no = no->prox;
