@@ -135,7 +135,7 @@ int Lista_remove_inicio(Lista* li){
         return 0;
     }
     int i;
-    for(i = 0; i < li->qtd; i++){
+    for(i = 0; i < li->qtd-1; i++){
         li->dados[i] = li->dados[i+1];
     }
     li->qtd--;
