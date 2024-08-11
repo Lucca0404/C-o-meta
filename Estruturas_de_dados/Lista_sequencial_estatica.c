@@ -10,8 +10,8 @@ struct lista{
 Lista* Lista_criar(){
     
     Lista *li = (Lista*) malloc(sizeof(Lista));
-    if(li == NULL){
-        return NULL;
+    if(li != NULL){
+        li->qtd = 0;
     }
     return li;
 }
