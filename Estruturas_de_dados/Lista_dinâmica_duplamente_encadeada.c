@@ -144,7 +144,7 @@ int Lista_remove(Lista* li, int mat){
         return 0;
     }
     Elem *no = *li;
-    while(no != NULL || no->dados.matricula == mat){
+    while(no != NULL && no->dados.matricula != mat){
         no = no->prox;
     }
     if(no == NULL){
