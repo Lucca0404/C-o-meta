@@ -117,7 +117,7 @@ int Lista_insere_ordenada(Lista* li, struct aluno al){
     }
     else{
         Elem *ante, *aux = *li;
-        while(aux != NULL || aux->dados.matricula < al.matricula){
+        while(aux != NULL && aux->dados.matricula < al.matricula){
             ante = aux;
             aux = aux->prox;
         }
