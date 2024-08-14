@@ -1,0 +1,33 @@
+Lista* Lista_mergesort(Lista* li1, Lista* li2){
+    Lista *li = (Lista*) malloc(sizeof(Lista));
+    if(!Lista_vazia(li1) && !Lista_vazia(li2) && li != NULL){
+        int *temp, tamanho, i;
+        int fim1 = 0, fim2 = 0;
+        tamanho = Lista_tamanho(li1) + Lista_tamanho(li2);
+        temp = (int*) malloc(tamanho * sizeof(int));
+        Elem *no1 = *li1, *no2 = *li2;
+        for(i = 0; i < tamanho; i++){
+            if(!fim1){
+                temp[i] = no1->dados;
+                no1 = no1->prox;
+            }
+            else if(!fim2){
+                temp[i] = no2->dados;
+                no2 = no2->prox;
+            }
+            if(no1 == NULL){
+                fim1 = 1;
+            }
+            if(no2 == NULL){
+                fim2 = 1;
+            }
+        }
+        mergeSort(temp,0,tamanho-1);
+        for(i = 0; i < tamanho; i++){
+            Lista_inserir_final(li,temp[i]);
+        }
+        free(temp);
+        
+    }
+    return li;
+}
