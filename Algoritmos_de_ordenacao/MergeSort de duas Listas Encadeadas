@@ -1,6 +1,6 @@
 Lista* Lista_mergesort(Lista* li1, Lista* li2){
     Lista *li = (Lista*) malloc(sizeof(Lista));
-    if(!Lista_vazia(li1) || !Lista_vazia(li2) || li != NULL){
+    if(!Lista_vazia(li1) && !Lista_vazia(li2) && li != NULL){
         int *temp, tamanho, i;
         int fim1 = 0, fim2 = 0;
         tamanho = Lista_tamanho(li1) + Lista_tamanho(li2);
