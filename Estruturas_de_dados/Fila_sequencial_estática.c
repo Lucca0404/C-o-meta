@@ -27,7 +27,7 @@ int Fila_cheia(Fila* fi){
     if(fi == NULL){
         return -1;
     }
-    (fi->qtd == MAX);
+    return (fi->qtd == MAX);
 }
 
 int Fila_vazia(Fila* fi){
