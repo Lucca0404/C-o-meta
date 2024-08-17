@@ -67,6 +67,6 @@ int Fila_consultar(Fila* fi, struct aluno *al){
     if(fi == NULL || Fila_vazia(fi)){
         return 0;
     }
-    *al = fi->dados[fi->incio];
+    *al = fi->dados[fi->inicio];
     return 1;
 }
