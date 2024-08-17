@@ -96,4 +96,5 @@ int Fila_consultar(Fila* fi, struct aluno *al){
         return 0;
     }
     *al = fi->inicio->dados;
+    return 1;
 }
