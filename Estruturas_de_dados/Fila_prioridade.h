@@ -7,8 +7,6 @@ struct paciente{
 
 typedef struct fpri Fpri;
 
-typedef struct paciente paciente;
-
 Fpri* Criar_fpri();
 
 void Apagar_fpri(Fpri* fp);
