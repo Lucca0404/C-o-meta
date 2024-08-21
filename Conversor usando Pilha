@@ -1,0 +1,62 @@
+int converter(int num, int chave){
+    Pilha *pi = criar_pilha();
+    if(pi == NULL){
+        return 0;
+    }
+    int i;
+    int res = 0;
+    switch (chave){
+        case 2:
+            for(num; num > 0; num /= 2){
+                i = num % 2;
+                inserir_pilha(pi,i);
+            }
+            break;
+        case 8:
+            for(num; num > 0; num /= 8){
+                i = num % 8;
+                inserir_pilha(pi,i);
+            }
+            break;
+        case 16:
+        for(num; num > 0; num /= 16){
+                i = num % 16;
+                inserir_pilha(pi,i);
+            }
+            break;
+        default:
+            apagar_pilha(pi);
+            return 0;
+    }
+    while(!vazia_pilha(pi)){
+        consultar_pilha(pi,&i);
+        if(i > 9){
+            switch(i){
+                case 10:
+                    printf("A");
+                    break;
+                case 11:
+                    printf("B");
+                    break;
+                case 12:
+                    printf("C");
+                    break;
+                case 13:
+                    printf("D");
+                    break;
+                case 14:
+                    printf("E");
+                    break;
+                case 15:
+                    printf("F");
+                    break;
+            }
+        }
+        else{
+            printf("%d", i);
+        }
+        remover_pilha(pi);
+    }
+    apagar_pilha(pi);
+    return 1;
+}
