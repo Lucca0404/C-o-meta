@@ -1,7 +1,7 @@
 struct aluno{
     int mat;
     char nome[30];
-}
+};
 
 typedef struct hash Hash;
 
