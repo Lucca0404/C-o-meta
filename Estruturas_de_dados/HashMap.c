@@ -4,35 +4,32 @@
 #include "hash.h"
 
 struct hash{
-    int qtd, TABLE_SIZE;
-    struct aluno **itens;
-}
+    struct aluno** itens;
+    int qtd, TAMANHO;
+};
 
 Hash* cria_hash(int tamanho){
-    Hash *ha = (Hash*) malloc(sizeof(Hash));
+    Hash* ha = (Hash*) malloc(sizeof(Hash));
     if(ha != NULL){
-        ha->TABLE_SIZE = tamanho;
-        ha->itens = (struct aluno**) malloc(ha->TABLE_SIZE * sizeof(struct aluno*));
+        int i = 0;
+        ha->TAMANHO = tamanho;
+        ha->itens = (struct aluno**) malloc(tamanho * sizeof(struct aluno*));
         if(ha->itens == NULL){
             free(ha);
             return NULL;
         }
-        ha->qtd = 0;
-        for(i = 0; i < ha->TABLE_SIZE; i ++){
+        for(i = 0; i < ha->TAMANHO; i++){
             ha->itens[i] = NULL;
         }
+        ha->qtd = 0;
     }
     return ha;
-}
-
-int chaveDivisao(int chave, int tamanho){
-    return (chave & 0x7FFFFFFF) % tamanho;
 }
 
 void libera_hash(Hash* ha){
     if(ha != NULL){
         int i;
-        for(i = 0; i < ha->TABLE_SIZE; i++){
+        for(i = 0; i < ha->TAMANHO; i++){
             if(ha->itens[i] != NULL){
                 free(ha->itens[i]);
             }
@@ -42,43 +39,43 @@ void libera_hash(Hash* ha){
     }
 }
 
+int chaveDivisao(int chave, int tamanho){
+    return (chave & 0x7FFFFFFF) % tamanho;
+}
+
 int valor_string(char *str){
     int i, valor = 7;
-    int tamanho = strlen(str);
-    for(i = 0; i < tamanho; i++){
+    for(i = 0; i < strlen(str); i++){
         valor = 31 * valor + (int) str[i];
     }
     return valor;
 }
 
 int insere_sem_colisao_hash(Hash* ha, struct aluno al){
-    if(ha == NULL || ha->qtd == ha->TABLE_SIZE){
+    if(ha == NULL || ha->qtd == ha->TAMANHO){
         return 0;
     }
-    
     int chave = valor_string(al.nome);
-    int pos = chaveDivisao(chave,ha->TABLE_SIZE);
-    
-    struct aluno* novo = (struct aluno*) malloc(sizeof(struct aluno));
-    if(novo == NULL){
+    int pos = chaveDivisao(chave, ha->TAMANHO);
+    struct aluno *alvo = (struct aluno*) malloc(sizeof(struct aluno));
+    if(alvo == NULL){
         return 0;
     }
-    *novo = al;
-    ha->itens[pos] = novo;
+    *alvo = al;
+    ha->itens[pos] = alvo;
     ha->qtd++;
     return 1;
 }
 
-int busca_sem_colisao_hash(Hash* ha, int mat, struct aluno *al){
+int busca_sem_colisao_hash(Hash* ha, char *str, struct aluno *al){
     if(ha == NULL){
         return 0;
     }
     int chave = valor_string(al.nome);
-    int pos = chaveDivisao(chave,ha->TABLE_SIZE);
+    int pos = chaveDivisao(chave, ha->TAMANHO);
     if(ha->itens[pos] == NULL){
         return 0;
     }
-    alvo = ha->itens[pos]
-    *al = *alvo;
+    *al = *(ha->itens[pos]);
     return 1;
 }
