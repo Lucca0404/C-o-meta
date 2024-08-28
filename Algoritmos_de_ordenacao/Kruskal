@@ -1,0 +1,48 @@
+void kruskal_grafo(Grafo* ga, int orig, int* pai){
+    int *arv, i, j, NV, dest, primeiro;
+    double menorPeso;
+    NV = ga->nro_vert;
+    arv = (int*) malloc(NV * sizeof(int));
+    for(i = 0; i < NV; i++){
+        pai[i] = -1;
+        arv[i] = i;
+    }
+    pai[orig] = orig;
+    while(1){
+        primeiro = 1;
+        for(i = 0; i < NV; i++){
+            for(j = 0; j < ga->grau[i]; j++){
+                if(arv[i] != arv[ga->arestas[i][j]]){
+                    if(primeiro){
+                        menorPeso = ga->pesos[i][j];
+                        orig = i;
+                        dest = ga->arestas[i][j];
+                        primeiro = 0;
+                    }
+                    else{
+                        if(menorPeso > ga->pesos[i][j]){
+                            menorPeso = ga->pesos[i][j];
+                            orig = i;
+                            dest = ga->arestas[i][j];
+                        }
+                    }
+                }
+            }
+        }
+        if(primeiro == 1){
+            break;
+        }
+        if(pai[orig] == -1){
+            pai[orig] = dest;
+        }
+        else{
+            pai[dest] = orig;
+        }
+        for(i = 0; i < NV; i++){
+            if(arv[i] == arv[dest]){
+                arv[i] = arv[orig];
+            }
+        }
+    }
+    free(arv);
+}
