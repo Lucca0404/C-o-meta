@@ -1,0 +1,37 @@
+void prim_grafo(Grafo* ga, int orig, int* pai){
+    int i, j, dest, NV, primeiro;
+    double menorPeso;
+    NV = ga->nro_vert;
+    for(i = 0; i < NV; i++){
+        pai[i] = -1;
+    }
+    pai[orig] = orig;
+    while(1){
+        primeiro = 1;
+        for(i = 0; i < NV; i++){
+            if(pai[i] != -1){
+                for(j = 0; j < ga->grau[i]; j++){
+                    if(pai[ga->arestas[i][j]] == -1){
+                        if(primeiro){
+                            menorPeso = ga->pesos[i][j];
+                            orig = i;
+                            dest = ga->arestas[i][j];
+                            primeiro = 0;
+                        }
+                        else{
+                            if(menorPeso > ga->pesos[i][j]){
+                                menorPeso = ga->pesos[i][j];
+                                orig = i;
+                                dest = ga->arestas[i][j];
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        if(primeiro == 1){
+            break;
+        }
+        pai[dest] = orig;
+    }
+}
