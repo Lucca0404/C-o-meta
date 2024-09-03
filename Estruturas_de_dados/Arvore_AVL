@@ -242,7 +242,7 @@ int consulta_ArvAVL(ArvAVL *raiz, int valor){
 }
 
 void preOrdem_ArvAVL(ArvAVL *raiz){
-    if(*raiz == NULL){
+    if(raiz == NULL){
         return;
     }
     if(*raiz != NULL){
@@ -253,7 +253,7 @@ void preOrdem_ArvAVL(ArvAVL *raiz){
 }
 
 void emOrdem_ArvAVL(ArvAVL *raiz){
-    if(*raiz == NULL){
+    if(raiz == NULL){
         return;
     }
     if(*raiz != NULL){
@@ -264,7 +264,7 @@ void emOrdem_ArvAVL(ArvAVL *raiz){
 }
 
 void posOrdem_ArvAVL(ArvAVL *raiz){
-    if(*raiz == NULL){
+    if(raiz == NULL){
         return;
     }
     if(*raiz != NULL){
