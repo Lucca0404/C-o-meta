@@ -1,3 +1,4 @@
+
 #include <stdlib.h>
 #include <stdio.h>
 #include "arvoreBin.h"
@@ -169,6 +170,9 @@ int consulta_ArvBin(ArvBin *raiz, int valor){
 }
 
 void preOrdem_ArvBin(ArvBin *raiz){
+    if(*raiz == NULL){
+        return;
+    }
     if(*raiz != NULL){
         printf("%d\n", (*raiz)->info);
         preOrdem_ArvBin(&((*raiz)->esq));
@@ -177,6 +181,9 @@ void preOrdem_ArvBin(ArvBin *raiz){
 }
 
 void posOrdem_ArvBin(ArvBin *raiz){
+    if(*raiz == NULL){
+        return;
+    }
     if(*raiz != NULL){
         posOrdem_ArvBin(&((*raiz)->esq));
         posOrdem_ArvBin(&((*raiz)->dir));
@@ -185,6 +192,9 @@ void posOrdem_ArvBin(ArvBin *raiz){
 }
 
 void emOrdem_ArvBin(ArvBin *raiz){
+    if(*raiz == NULL){
+        return;
+    }
     if(*raiz != NULL){
         emOrdem_ArvBin(&((*raiz)->esq));
         printf("%d\n", (*raiz)->info);
