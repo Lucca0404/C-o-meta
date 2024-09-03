@@ -64,11 +64,15 @@ int alt_NO(struct NO* no){
 }
 
 int fator_balanceamento_no(struct NO* no){
-    return labs((no->esq)->alt - (no->dir)->alt);
+    return labs(alt_NO(no->esq) - alt_NO(no->dir));
+    
 }
 
 int maior(int x, int y){
-    return (x > y)? x:y;
+    if(x > y){
+        return x;
+    }
+    else return y;
 }
 
 void rotacao_LL(ArvAVL *A){
@@ -97,7 +101,7 @@ void rotacao_LR(ArvAVL *A){
 }
 
 void rotacao_RL(ArvAVL *A){
-    rotacao_LL(&(*A)->esq);
+    rotacao_LL(&(*A)->dir);
     rotacao_RR(A);
 }
 
@@ -134,7 +138,7 @@ int insere_ArvAVL(ArvAVL *raiz, int valor){
         if(valor > atual->info){
             if((res = insere_ArvAVL(&(atual->dir), valor)) == 1){
                 if(fator_balanceamento_no(atual) >= 2){
-                    if(valor > (*raiz)->dir->info){
+                    if((*raiz)->dir->info < valor){
                         rotacao_RR(raiz);
                     }
                     else{
