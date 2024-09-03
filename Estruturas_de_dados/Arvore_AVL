@@ -135,10 +135,10 @@ int insere_ArvAVL(ArvAVL *raiz, int valor){
             if((res = insere_ArvAVL(&(atual->dir), valor)) == 1){
                 if(fator_balanceamento_no(atual) >= 2){
                     if(valor > (*raiz)->dir->info){
-                        rotacao_LL(raiz);
+                        rotacao_RR(raiz);
                     }
                     else{
-                        rotacao_LR(raiz);
+                        rotacao_RL(raiz);
                     }
                 }
             }
