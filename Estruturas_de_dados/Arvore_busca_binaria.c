@@ -1,72 +1,70 @@
-
 #include <stdlib.h>
 #include <stdio.h>
-#include "arvoreBin.h"
+#include "arvore.h"
 
 struct NO{
     int info;
-    struct NO *dir;
-    struct NO *esq;
+    struct NO* esq;
+    struct NO* dir;
 };
 
-ArvBin* cria_ArvBin(){
-    ArvBin *raiz = (ArvBin*) malloc(sizeof(ArvBin));
-    if(raiz != NULL){
-        *raiz = NULL; 
+Arv* criar_Arv(){
+    Arv* arv = (Arv*) malloc(sizeof(Arv));
+    if(arv != NULL){
+        *arv = NULL;
     }
-    return raiz;
+    return arv;
 }
 
 void libera_NO(struct NO* no){
     if(no == NULL){
         return;
     }
-    libera_NO(no->dir);
-    libera_NO(no->esq);
-    free(no);
-    no = NULL;
+    else{
+        libera_NO(no->dir);
+        libera_NO(no->esq);
+        free(no);
+        no = NULL;
+    }
 }
 
-void libera_ArvBin(ArvBin *raiz){
+void apagar_Arv(Arv* raiz){
     if(raiz != NULL){
         libera_NO(*raiz);
         free(raiz);
     }
 }
 
-int vazia_ArvBin(ArvBin *raiz){
-    return (*raiz == NULL || raiz == NULL);
+int vazia_Arv(Arv* raiz){
+    return (raiz == NULL || *raiz == NULL);
 }
 
-int altura_ArvBin(ArvBin *raiz){
-    if(vazia_ArvBin(raiz)){
+int altura_Arv(Arv* raiz){
+    if(vazia_Arv(raiz)){
         return 0;
     }
-    int alt_esq = altura_ArvBin(&((*raiz)->esq));
-    int alt_dir = altura_ArvBin(&((*raiz)->dir));
+    int alt_esq = altura_Arv(&(*raiz)->esq);
+    int alt_dir = altura_Arv(&(*raiz)->dir);
     return (alt_dir > alt_esq)? alt_dir+1 : alt_esq+1;
 }
 
-int totalNo_ArvBin(ArvBin *raiz){
-    if(vazia_ArvBin(raiz)){
+int totalNO_Arv(Arv* raiz){
+    if(vazia_Arv(raiz)){
         return 0;
     }
-    int total_esq = totalNo_ArvBin(&((*raiz)->esq));
-    int total_dir = totalNo_ArvBin(&((*raiz)->dir));
-    return (total_esq + total_dir + 1);
+    int noEsq = totalNO_Arv(&(*raiz)->esq);
+    int noDir = totalNO_Arv(&(*raiz)->dir);
+    return (noEsq + noDir + 1);
 }
 
-int insere_ArvBin(ArvBin *raiz, int valor){
+int insere_Arv(Arv* raiz, int valor){
     if(raiz == NULL){
         return 0;
     }
-    struct NO *novo = (struct NO*) malloc(sizeof(struct NO));
-    if(novo == NULL){
-        return 0;
-    }
+    struct NO* novo = (struct NO*) malloc(sizeof(struct NO));
     novo->info = valor;
-    novo->dir = NULL;
     novo->esq = NULL;
+    novo->dir = NULL;
     if(*raiz == NULL){
         *raiz = novo;
     }
@@ -97,7 +95,7 @@ int insere_ArvBin(ArvBin *raiz, int valor){
 }
 
 struct NO* remove_atual(struct NO* atual){
-    struct NO *no1, *no2;
+    struct NO* no1, *no2;
     if(atual->esq == NULL){
         no2 = atual->dir;
         free(atual);
@@ -118,7 +116,7 @@ struct NO* remove_atual(struct NO* atual){
     return no2;
 }
 
-int remove_ArvBin(ArvBin *raiz, int valor){
+int remove_Arv(Arv* raiz, int valor){
     if(raiz == NULL){
         return 0;
     }
@@ -150,54 +148,152 @@ int remove_ArvBin(ArvBin *raiz, int valor){
     return 0;
 }
 
-int consulta_ArvBin(ArvBin *raiz, int valor){
+int consulta_Arv(Arv* raiz, int valor){
     if(raiz == NULL){
         return 0;
     }
-    struct NO* atual = *raiz;
-    while(atual != NULL){
-        if(atual->info == valor){
+    struct NO* no = *raiz;
+    while(no != NULL){
+        if(no->info == valor){
             return 1;
         }
-        else if(valor > atual->info){
-            atual = atual->dir;
-        }
         else{
-            atual = atual->esq;
+            if(no->info < valor){
+                no = no->dir;
+            }
+            else{
+                no = no->esq;
+            }
         }
     }
     return 0;
 }
 
-void preOrdem_ArvBin(ArvBin *raiz){
+int preOrdem_Arv(Arv* raiz){
     if(*raiz == NULL){
-        return;
+        return 0;
     }
-    if(*raiz != NULL){
-        printf("%d\n", (*raiz)->info);
-        preOrdem_ArvBin(&((*raiz)->esq));
-        preOrdem_ArvBin(&((*raiz)->dir));
-    }
+    printf("%d\n", (*raiz)->info);
+    preOrdem_Arv(&(*raiz)->esq);
+    preOrdem_Arv(&(*raiz)->dir);
 }
 
-void posOrdem_ArvBin(ArvBin *raiz){
+int emOrdem_Arv(Arv* raiz){
     if(*raiz == NULL){
-        return;
+        return 0;
     }
-    if(*raiz != NULL){
-        posOrdem_ArvBin(&((*raiz)->esq));
-        posOrdem_ArvBin(&((*raiz)->dir));
-        printf("%d\n", (*raiz)->info);
-    }
+    emOrdem_Arv(&((*raiz)->esq));
+    printf("%d\n", (*raiz)->info);
+    emOrdem_Arv(&((*raiz)->dir));
 }
 
-void emOrdem_ArvBin(ArvBin *raiz){
+int posOrdem_Arv(Arv* raiz){
     if(*raiz == NULL){
-        return;
+        return 0;
     }
-    if(*raiz != NULL){
-        emOrdem_ArvBin(&((*raiz)->esq));
-        printf("%d\n", (*raiz)->info);
-        emOrdem_ArvBin(&((*raiz)->dir));
+    posOrdem_Arv(&(*raiz)->esq);
+    posOrdem_Arv(&(*raiz)->dir);
+    printf("%d\n", (*raiz)->info);
+}
+
+int totalInter_Arv(Arv* raiz){
+    if(vazia_Arv(raiz)){
+        return 0;
     }
+    if((*raiz)->esq == NULL && (*raiz)->dir == NULL){
+        return 0;
+    }
+    int noEsq = totalInter_Arv(&(*raiz)->esq);
+    int noDir = totalInter_Arv(&(*raiz)->dir);
+    return (noEsq + noDir + 1);
+}
+
+int totalFolha_Arv(Arv* raiz){
+    if(vazia_Arv(raiz)){
+        return 0;
+    }
+    int noEsq = totalFolha_Arv(&(*raiz)->esq);
+    int noDir = totalFolha_Arv(&(*raiz)->dir);
+    
+    return (noEsq + noDir + (((*raiz)->esq == NULL && (*raiz)->dir == NULL)? 1:0));
+}
+
+int removerPares_Arv(Arv* raiz){
+    if(vazia_Arv(raiz)){
+        return 0;
+    }
+    removerPares_Arv(&(*raiz)->esq);
+    removerPares_Arv(&(*raiz)->dir);
+    if((*raiz)->info % 2 == 0){
+        remove_Arv(raiz,(*raiz)->info);
+    }
+    return 1;
+}
+
+int ehBusca_Arv(Arv* raiz){
+    if(raiz == NULL){
+        return -1;
+    }
+    if((*raiz)->esq == NULL){
+        return 1;
+    }
+    else{
+        if((*raiz)->esq->info >= (*raiz)->info){
+            return 0;
+        }
+    }
+    if((*raiz)->dir == NULL){
+        return 1;
+    }
+    else{
+        if((*raiz)->dir->info < (*raiz)->info){
+            return 0;
+        }
+    }
+    ehBusca_Arv(&(*raiz)->esq);
+    ehBusca_Arv(&(*raiz)->dir);
+    return 1;
+}
+
+int maiorValor_Arv(Arv* raiz){
+    if(vazia_Arv(raiz)){
+        return 0;
+    }
+    struct NO *no = *raiz, *ant = no;
+    while(no != NULL){
+        ant = no;
+        no = no->dir;
+    }
+    return ant->info;
+}
+
+int similares(Arv* raiz1, Arv* raiz2){
+    if(totalNO_Arv(raiz1) != totalNO_Arv(raiz2)){
+        return 0;
+    }
+    if(altura_Arv(raiz1) != altura_Arv(raiz2)){
+        return 0;
+    }
+    if(vazia_Arv(raiz1) && vazia_Arv(raiz2)){
+        return 1;
+    }
+    else{
+        if(vazia_Arv(raiz1) || vazia_Arv(raiz2)){
+            return 0;
+        }
+    }
+    return (similares(&(*raiz1)->esq,&(*raiz2)->esq) && similares(&(*raiz1)->dir,&(*raiz2)->dir));
+}
+
+int iguais(Arv* raiz1, Arv* raiz2){
+    if(vazia_Arv(raiz1) && vazia_Arv(raiz2)){
+        return 1;
+    }
+    if(vazia_Arv(raiz1) || vazia_Arv(raiz2)){
+        return 0;
+    }
+    if((*raiz1)->info != (*raiz2)->info){
+        return 0;
+    }
+    return (iguais(&(*raiz1)->esq,&(*raiz2)->esq) && iguais(&(*raiz1)->dir,&(*raiz2)->dir));
 }
